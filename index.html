@@ -1,0 +1,517 @@
+
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>Nuestro Primer Mes ❤️</title>
+
+<style>
+
+body{
+font-family:Arial;
+margin:0;
+background:#ffe6f2;
+text-align:center;
+overflow-x:hidden;
+}
+
+h1{
+color:#ff2e75;
+}
+
+/* pantalla inicial animacion */
+
+#pantallaInicio{
+position:fixed;
+width:100%;
+height:100%;
+background:#ff2e75;
+color:white;
+display:flex;
+flex-direction:column;
+justify-content:center;
+align-items:center;
+font-size:35px;
+z-index:9999;
+animation:desaparecer 4s forwards;
+}
+
+@keyframes desaparecer{
+0%{opacity:1}
+80%{opacity:1}
+100%{opacity:0;visibility:hidden}
+}
+
+/* contador */
+
+#contador{
+font-size:20px;
+color:#ff2e75;
+margin-bottom:10px;
+}
+
+/* menu */
+
+.container{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:20px;
+padding:20px;
+}
+
+.card{
+background:white;
+padding:20px;
+border-radius:15px;
+box-shadow:0 5px 10px rgba(0,0,0,0.2);
+cursor:pointer;
+font-size:18px;
+transition:0.3s;
+}
+
+.card:hover{
+transform:scale(1.05);
+}
+
+/* secciones */
+
+.section{
+display:none;
+padding:20px;
+}
+
+button{
+padding:10px 20px;
+border:none;
+background:#ff2e75;
+color:white;
+border-radius:10px;
+margin-top:20px;
+cursor:pointer;
+font-size:16px;
+}
+
+/* imagenes */
+
+img{
+width:90%;
+max-width:400px;
+border-radius:10px;
+margin-top:10px;
+}
+
+.foto-principal{
+width:90%;
+max-width:350px;
+border-radius:20px;
+margin-top:10px;
+box-shadow:0 5px 15px rgba(0,0,0,0.3);
+}
+
+/* galeria */
+
+.galeria{
+display:grid;
+grid-template-columns:repeat(auto-fit,minmax(200px,1fr));
+gap:15px;
+margin-top:20px;
+}
+
+.galeria img{
+width:100%;
+border-radius:12px;
+}
+
+/* carrusel */
+
+.carrusel{
+display:flex;
+align-items:center;
+justify-content:center;
+gap:15px;
+margin-top:20px;
+}
+
+/* corazones */
+
+.corazon{
+position:fixed;
+top:-10px;
+color:red;
+font-size:20px;
+animation:caer 6s linear infinite;
+}
+
+@keyframes caer{
+0%{transform:translateY(-10px)}
+100%{transform:translateY(100vh)}
+}
+
+</style>
+
+<script>
+
+/* abrir secciones */
+
+function abrir(id){
+
+document.getElementById("inicio").style.display="none";
+
+let secciones=document.getElementsByClassName("section");
+
+for(let i=0;i<secciones.length;i++){
+secciones[i].style.display="none";
+}
+
+document.getElementById(id).style.display="block";
+
+}
+
+function volver(){
+
+document.getElementById("inicio").style.display="block";
+
+let secciones=document.getElementsByClassName("section");
+
+for(let i=0;i<secciones.length;i++){
+secciones[i].style.display="none";
+}
+
+}
+
+/* musica inicio */
+
+function reproducirMusica(){
+document.getElementById("musica").play();
+}
+
+function pausarMusica(){
+document.getElementById("musica").pause();
+}
+
+/* carrusel */
+
+let imagenes=[
+"foto_viaje.jpeg",
+"foto_viaje2.jpeg",
+"foto_viaje3.jpeg",
+"foto_viaje4.jpeg",
+"foto_viaje5.jpeg"
+];
+
+let indice=0;
+
+function mover(direccion){
+
+indice+=direccion;
+
+if(indice<0){
+indice=imagenes.length-1;
+}
+
+if(indice>=imagenes.length){
+indice=0;
+}
+
+document.getElementById("imagenCarrusel").src=imagenes[indice];
+
+}
+
+/* contador de dias */
+
+function actualizarContador(){
+
+let inicio=new Date("2026-02-11");
+let hoy=new Date();
+
+let diferencia=hoy-inicio;
+
+let dias=Math.floor(diferencia/(1000*60*60*24));
+
+document.getElementById("contador").innerHTML=
+"❤️ Llevamos "+dias+" días creando recuerdos juntos ❤️";
+
+}
+
+setInterval(actualizarContador,1000);
+
+/* corazones */
+
+function crearCorazon(){
+
+let corazon=document.createElement("div");
+
+corazon.className="corazon";
+
+corazon.innerHTML="❤️";
+
+corazon.style.left=Math.random()*100+"vw";
+
+corazon.style.fontSize=(Math.random()*20+10)+"px";
+
+document.body.appendChild(corazon);
+
+setTimeout(()=>{
+corazon.remove();
+},6000);
+
+}
+
+setInterval(crearCorazon,500);
+
+</script>
+
+</head>
+
+<body onload="actualizarContador()">
+
+<!-- animacion inicio -->
+
+<div id="pantallaInicio">
+
+<div>Jorge ❤️ Nahomi</div>
+<div style="font-size:20px;margin-top:20px">
+Nuestro primer mes juntos
+</div>
+
+</div>
+
+<!-- musica -->
+
+<audio id="musica" loop>
+<source src="cancion.mp3" type="audio/mpeg">
+</audio>
+
+<!-- inicio -->
+
+<div id="inicio">
+
+<h1>Nuestro Primer Mes ❤️</h1>
+
+<div id="contador"></div>
+
+<img src="foto_nosotros.jpeg" class="foto-principal">
+
+<p>Un pequeño recuerdo de nuestros momentos juntos</p>
+<p>que empezó un 11 de febrero</p>
+<p>y aún faltan muchas cosas por vivir 💕</p>
+
+<button onclick="reproducirMusica()">🎵 Reproducir canción</button>
+<button onclick="pausarMusica()">⏸️ Pausar canción</button>
+
+<div class="container">
+
+<div class="card" onclick="abrir('propuesta')">
+💌 La propuesta
+</div>
+
+<div class="card" onclick="abrir('viaje')">
+✈️ El primer viaje
+</div>
+
+<div class="card" onclick="abrir('piscina')">
+🏊 Día de piscina
+</div>
+
+<div class="card" onclick="abrir('juegos')">
+🎮 Día de juegos
+</div>
+
+<div class="card" onclick="abrir('detalles')">
+🎁 Detalles
+</div>
+
+</div>
+
+</div>
+
+<!-- VIAJE -->
+
+<div id="viaje" class="section">
+
+<h1>✈️ Nuestro primer viaje</h1>
+
+<p>Este fue uno de los momentos más especiales contigo.</p> 
+<p>Un viaje a Santa Elena con mis amigos, yo tenía planeado</p> 
+<p>hacer un picnic contigo mi vida, al atardecer, fue único y mágico.</p>
+
+
+<div class="carrusel">
+
+<button onclick="mover(-1)">❮</button>
+
+<img id="imagenCarrusel" src="foto_viaje.jpeg">
+
+<button onclick="mover(1)">❯</button>
+
+</div>
+<p>Nuestro primer atardecer juntos 🌅</p> 
+<p>Ese día confirmé que quiero seguir viajando</p> 
+<p>y viviendo momentos contigo mi amor ❤️.</p>
+
+<br>
+<button onclick="volver()">Volver</button>
+
+</div>
+
+<!-- PROPUESTA -->
+
+<div id="propuesta" class="section">
+
+<h1>💌 La propuesta</h1>
+
+<p>El día que te pedí ser mi enamorada fue uno de los más felices.</p> 
+<p>Fue una noche en el auto, en villa club donde te di un ramo de rosas</p> 
+<p>y en el centro habia una rosa blanca la cual te pedi mediante</p> 
+<p>un mensaje que la sacaras... Lo recuerdas...?</p>
+
+<video width="350" controls>
+<source src="video_propuesta.mp4">
+</video>
+
+<p>Fue un esperado "SI" mi muñequita preciosa</p> 
+<p>donde dio inicio a nuestra historia...</p>
+
+<br>
+<button onclick="volver()">Volver</button>
+
+</div>
+
+<!-- SECCION PISCINA --> 
+<style> 
+
+.galeria{ 
+display:grid; 
+grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); 
+gap:15px; margin-top:20px; padding:10px; 
+} 
+
+.galeria img{ 
+width:100%; border-radius:12px; 
+box-shadow:0 4px 10px rgba(0,0,0,0.2); 
+transition: transform 0.3s; 
+} 
+
+.galeria img:hover{ transform:scale(1.05); 
+
+} 
+
+</style> 
+
+<div id="piscina" class="section"> 
+
+<h1>🏊 Día de piscina</h1> 
+
+<p>Un día lleno de risas y muchas aventuras.</p> 
+<p>Un día perfecto con el sol en su punto.</p> 
+<p>El agua en su punto, y solo éramos tú y yo ❤️</p> 
+
+<div class="galeria"> 
+
+<img src="foto_piscina.jpeg"> 
+<img src="foto_piscina2.jpeg"> 
+<img src="foto_piscina3.jpeg"> 
+
+</div> 
+<br> 
+
+<button onclick="volver()">Volver</button> 
+
+</div>
+
+<!-- JUEGOS -->
+
+<div id="juegos" class="section">
+
+<h1>🎮 Día de juegos</h1>
+
+<p>Siempre nos divertimos mucho juntos.</p> 
+<p>Cuando le diste a la maquina y luego</p> 
+<p>te sujete la mano senti una conexión</p> 
+<p>Que no puedo explicar.</p>
+
+<video width="350" controls>
+<source src="video_juegos.mp4">
+</video>
+
+<br>
+<button onclick="volver()">Volver</button>
+
+</div>
+
+<!-- SECCION DETALLES --> 
+
+<div id="detalles" class="section"> 
+
+<h1>🎁 Detalles</h1> 
+
+<p>Pequeños detalles que hacen nuestra historia especial.</p> 
+
+<img src="foto_detalle.jpeg"> 
+<img src="foto_detalle2.jpeg"> 
+
+<p>Y muchos detalles más que no caben aquí amor.
+</p> <p>Feliz primer mes mi muñequita preciosa ❤️</p> 
+
+<br> 
+<button onclick="reproducirCancion()">🎵 Reproducir canción</button> 
+<button onclick="pausarCancion()">⏸️ Pausar canción</button> 
+
+<audio id="cancionDetalles"> 
+<source src="entre_febrero_y_el_sol.mp3" type="audio/mpeg"> 
+</audio> <br><br> <button onclick="volver()">Volver</button> 
+
+</div> 
+
+<script> 
+function reproducirCancion()
+{ document.getElementById("cancionDetalles").play();
+} 
+function pausarCancion(){ 
+document.getElementById("cancionDetalles").pause(); 
+} 
+</script>
+
+<!-- MENSAJE FINAL DEL PRIMER MES -->
+
+
+<div style="margin-top:80px;padding:40px;background:#fff0f6;border-top:3px solid #ff2e75;">
+
+<h1>❤️ Nuestro primer mes ❤️</h1>
+
+<p>Entre febrero y el sol empezó nuestra historia.</p>
+<p>Un mes lleno de momentos, risas, aventuras</p>
+<p>y recuerdos que jamás voy a olvidar contigo.</p>
+
+<p>Gracias por este primer mes conmigo mi amor.</p>
+<p>Y que este sea solo el comienzo de muchos más. 💕</p>
+
+<br>
+
+<button onclick="document.getElementById('cancionFinal').play()">
+🎵 Escuchar nuestra canción
+</button>
+
+<button onclick="document.getElementById('cancionFinal').pause()">
+⏸️ Pausar canción
+</button>
+
+<br><br>
+
+<audio id="cancionFinal" loop>
+<source src="un_mes_bajo_el_mismo_sol.mp3" type="audio/mpeg">
+</audio>
+
+<p style="margin-top:20px;color:#ff2e75;font-size:18px;">
+Jorge ❤️ Nahomi
+</p>
+
+</div>
+
+
+</body>
+</html>
+
